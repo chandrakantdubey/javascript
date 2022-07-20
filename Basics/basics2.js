@@ -118,6 +118,24 @@ console.log(friends.indexOf('Shraddha'));
 console.log(friends.includes('Sanjay'));
 console.log(friends.includes('Sanju'));
 
+// assignments
+const popOfCountries = [1410,1310,400,250];
+console.log(popOfCountries.length===4);
+let percentages = [];
+for(let i = 0; i < popOfCountries.length; i++){
+  percentages[i] = Math.trunc((percentageOfWorld(popOfCountries[i])));
+}
+console.log(percentages);
+
+const neighbourCountry = ["Pakistan","Bangaladesh","Nepal","Bhutan","China","Srilanka"];
+neighbourCountry.push("Afghanistan");
+neighbourCountry.pop();
+if(!neighbourCountry.includes('Germany')){
+  console.log('Probably not a central European Country 😂');
+};
+neighbourCountry[1] = "West Pakistan";
+console.log(neighbourCountry[1]);
+
 
 ///////////////////////////////////////
 // Coding Challenge #1
@@ -189,29 +207,132 @@ console.log(total[0], total[1], total[2]);
 
 // Objects
 // L-6
-const Chandrakant = {
-    firstname: 'Chandrakant',
-    lastname: 'Dubey',
-    age: 2022-1996,
-    job: 'Project Engineer',
-    friends: ['Shraddha','Sanju','Yuvi'],
+const John = {
+  height: 1.8,
+  johnFullName: "John Yang",
+  mass: 70,
+  johnBMI: (mass, height) => {
+    return mass / (height * height);
+  },
 };
+console.log(John.johnBMI(54, 1.65));
+
+const Chandrakant = {
+  firstname: "Chandrakant",
+  lastname: "Dubey",
+  birthYear: 1996,
+  job: "Project Engineer",
+  friends: ["Shra", "Sanju", "Yuvi"],
+  hasDriversLicense: false,
+  calcAge: function () {
+    this.age = 2022 - this.birthYear;
+    return this.age;
+  },
+  getSummary: function () {
+    return `${this.firstname} is ${this.age} years and he has ${
+      this.hasDriversLicense ? "a" : "no"
+    } driver's license.`;
+  },
+};
+console.log(Chandrakant.getSummary());
 console.log(Chandrakant);
 // accesing the property
 console.log(Chandrakant.lastname);
-console.log(Chandrakant['lastname']);
-const nameKey = 'name';
+console.log(Chandrakant["lastname"]);
+const nameKey = "name";
 // brackets allow to pass in expressions
-console.log(Chandrakant['first'+nameKey]);
+console.log(Chandrakant["first" + nameKey]);
 
-const John = {
-    height: 1.8,
-    johnFullName: 'John Yang',
-    mass: 70,
-    johnBMI: (mass,height)=>{
-    return mass / (height * height);
-    }
+console.log(Chandrakant.calcAge());
+console.log(Chandrakant.age);
+console.log(Chandrakant.getSummary());
+
+// assignments
+const myCountry = {
+  country: "India",
+  capital: "New Delhi",
+  language: "Hindi",
+  population: 1310,
+  neighbours: [
+    "Pakistan",
+    "Bangaladesh",
+    "Nepal",
+    "Bhutan",
+    "China",
+    "Srilanka",
+  ],
+  describe: function () {
+    return `${this.country}'s captial is ${this.capital} and it has ${this.neighbours.length} neighbours and with ${this.population} million people majorly speaking ${this.language} language is very diverse in language and culture.`;
+  },
+};
+
+console.log(`${myCountry.country}'s captial is ${myCountry.capital} and it has ${myCountry.neighbours.length} neighbours and with ${myCountry.population} million people majorly speaking ${myCountry.language} language is very diverse in language and culture.`);
+
+myCountry.population = myCountry.population + 2;
+console.log(myCountry.population);
+myCountry.population = myCountry.population - 2;
+console.log(myCountry.population);
+myCountry.checkIsland = false;
+console.log(myCountry.describe());
+console.log(myCountry.checkIsland);
+
+///////////////////////////////////////
+// Coding Challenge #3
+/*
+Let's go back to Mark and John comparing their BMIs! This time, let's use objects to implement the calculations! Remember: BMI = mass / height ** 2 = mass / (height * height). (mass in kg and height in meter)
+
+1. For each of them, create an object with properties for their full name, mass, and height (Mark Miller and John Smith)
+2. Create a 'calcBMI' method on each object to calculate the BMI (the same method on both objects). Store the BMI value to a property, and also return it from the method.
+3. Log to the console who has the higher BMI, together with the full name and the respective BMI. Example: "John Smith's BMI (28.3) is higher than Mark Miller's (23.9)!"
+
+TEST DATA: Marks weights 78 kg and is 1.69 m tall. John weights 92 kg and is 1.95 m tall.
+
+GOOD LUCK 😀
+*/
+
+const Mark = {
+  firstName: "Mark",
+  lastName: "Sucker",
+  weight: 95,
+  height: 1.96,
+  BMI: function(){
+    return Math.floor(this.weight / (this.height * this.height));
+  }
 }
-console.log(John.johnBMI(54,1.65));
+console.log(Mark.BMI());
+
+const JohnSmith = {
+  firstName: "John",
+  lastName: "Smith",
+  weight: 90,
+  height: 1.76,
+  BMI: function(){
+    return Math.floor(this.weight / (this.height * this.height));
+  }
+}
 
 
+
+
+
+///////////////////////////////////////
+// Coding Challenge #4
+
+/*
+Let's improve Steven's tip calculator even more, this time using loops!
+
+1. Create an array 'bills' containing all 10 test bill values
+2. Create empty arrays for the tips and the totals ('tips' and 'totals')
+3. Use the 'calcTip' function we wrote before (no need to repeat) to calculate tips and total values (bill + tip) for every bill value in the bills array. Use a for loop to perform the 10 calculations!
+
+TEST DATA: 22, 295, 176, 440, 37, 105, 10, 1100, 86 and 52
+
+HINT: Call calcTip in the loop and use the push method to add values to the tips and totals arrays 😉
+
+4. BONUS: Write a function 'calcAverage' which takes an array called 'arr' as an argument. This function calculates the average of all numbers in the given array. This is a DIFFICULT challenge (we haven't done this before)! Here is how to solve it:
+  4.1. First, you will need to add up all values in the array. To do the addition, start by creating a variable 'sum' that starts at 0. Then loop over the array using a for loop. In each iteration, add the current value to the 'sum' variable. This way, by the end of the loop, you have all values added together
+  4.2. To calculate the average, divide the sum you calculated before by the length of the array (because that's the number of elements)
+  4.3. Call the function with the 'totals' array
+
+GOOD LUCK 😀
+*/
